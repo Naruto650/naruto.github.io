@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>金铲铲之战 - 全装备顶级实验室</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+    <!-- 1. 炫彩液态入场加载条 -->
+    <div id="site-loader">
+        <div class="loader-content">
+            <div class="loader-logo">金铲铲之战实验室</div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="liquid-shine"></div>
+                </div>
+            </div>
+            <div class="loader-text">TEAM CORE INITIALIZING...</div>
+        </div>
+    </div>
+
+    <!-- 2. 固定导航栏 -->
+    <nav class="navbar">
+        <div class="w1024 nav-inner">
+            <div class="logo-area">
+                <img src="images/logo.png" alt="Logo" class="site-logo">
+                <span class="logo-text">金铲铲之战</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="javascript:void(0)" onclick="scrollToPage('page-home')">首页</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToPage('page-items')">装备合成</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToPage('page-emblems')">转职纹章</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToPage('page-artifacts')">神器展示</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToPage('page-team')">小组成员</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="snap-container" id="mainContainer">
+        <!-- 第一页：3D 轮播图 -->
+        <section class="page-section" id="page-home">
+            <div class="carousel-full-wrapper">
+                <div class="stack-container" id="stackCarousel">
+                    <div class="stack-item active"><img src="images/banner1.jpg"></div>
+                    <div class="stack-item next"><img src="images/banner2.jpg"></div>
+                    <div class="stack-item prev"><img src="images/banner3.jpg"></div>
+                    <button class="arrow-btn btn-left" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="arrow-btn btn-right" onclick="changeSlide(1)">&#10095;</button>
+                </div>
+            </div>
+            <div class="scroll-hint white-hint" onclick="scrollToPage('page-items')">向下滚动探索合成实验室 ↓</div>
+        </section>
+
+        <!-- 第二页：成装合成 -->
+        <section class="page-section" id="page-items">
+            <main class="w1024 content-fixed-area section-animate">
+                <h2 class="page-title">基础成装合成</h2>
+                <div class="grid-wrap-standard">
+                    <div class="grid-4x2" id="gridItems">
+                        <div class="item-card item-btn" data-id="sword"><img src="images/sword.png"><span>暴风大剑</span>
+                        </div>
+                        <div class="item-card item-btn" data-id="bow"><img src="images/bow.png"><span>反曲之弓</span></div>
+                        <div class="item-card item-btn" data-id="glove"><img src="images/glove.png"><span>拳套</span>
+                        </div>
+                        <div class="item-card item-btn" data-id="rod"><img src="images/rod.png"><span>无用大棒</span></div>
+                        <div class="item-card item-btn" data-id="tear"><img src="images/tear.png"><span>女神之泪</span>
+                        </div>
+                        <div class="item-card item-btn" data-id="vest"><img src="images/vest.png"><span>锁子甲</span></div>
+                        <div class="item-card item-btn" data-id="belt"><img src="images/belt.png"><span>巨人腰带</span>
+                        </div>
+                        <div class="item-card item-btn" data-id="cloak"><img src="images/cloak.png"><span>负极斗篷</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-box-container lifted">
+                    <div class="result-inner" id="resItemsContainer">
+                        <div class="guide-text">请选择两件基础散件进行合成</div>
+                        <div class="fusion-content" style="display: none;">
+                            <img src="" class="res-img">
+                            <div class="res-info">
+                                <h4></h4>
+                                <p></p>
+                            </div>
+                        </div>
+                        <span class="reset-link" onclick="clearSynthesis('items')">清空重选</span>
+                    </div>
+                </div>
+            </main>
+            <div class="scroll-hint white-hint" onclick="scrollToPage('page-emblems')">探索纹章合成实验室 ↓</div>
+        </section>
+
+        <!-- 第三页：转职纹章 -->
+        <section class="page-section" id="page-emblems">
+            <main class="w1024 content-fixed-area section-animate">
+                <h2 class="page-title">转职纹章合成</h2>
+                <div class="grid-wrap-standard emblem-top-lift">
+                    <div class="special-row">
+                        <div class="item-card gold-item emb-card" data-id="spatula" data-type="spec"><img
+                                src="images/spatula.png"><span>金铲铲</span></div>
+                        <div class="item-card gold-item emb-card" data-id="pan" data-type="spec"><img
+                                src="images/pan.png"><span>金锅锅</span></div>
+                    </div>
+                    <div class="grid-4x2" id="gridEmblems">
+                        <div class="item-card emb-card" data-id="sword" data-type="base"><img
+                                src="images/sword.png"><span>暴风大剑</span></div>
+                        <div class="item-card emb-card" data-id="bow" data-type="base"><img
+                                src="images/bow.png"><span>反曲之弓</span></div>
+                        <div class="item-card emb-card" data-id="cloak" data-type="base"><img
+                                src="images/cloak.png"><span>负极斗篷</span></div>
+                        <div class="item-card emb-card" data-id="vest" data-type="base"><img
+                                src="images/vest.png"><span>锁子甲</span></div>
+                        <div class="item-card emb-card" data-id="glove" data-type="base"><img
+                                src="images/glove.png"><span>拳套</span></div>
+                        <div class="item-card emb-card" data-id="belt" data-type="base"><img
+                                src="images/belt.png"><span>巨人腰带</span></div>
+                        <div class="item-card emb-card" data-id="tear" data-type="base"><img
+                                src="images/tear.png"><span>女神之泪</span></div>
+                        <div class="item-card emb-card" data-id="rod" data-type="base"><img
+                                src="images/rod.png"><span>无用大棒</span></div>
+                    </div>
+                </div>
+                <div class="result-box-container lifted">
+                    <div class="result-inner" id="resEmblemsContainer">
+                        <div class="guide-text">请选择 [特殊材料] + [对应散件]</div>
+                        <div class="fusion-content" style="display: none;">
+                            <img src="" class="res-img">
+                            <div class="res-info">
+                                <h4></h4>
+                                <p></p>
+                            </div>
+                        </div>
+                        <span class="reset-link" onclick="clearSynthesis('emblems')">清空重选</span>
+                    </div>
+                </div>
+            </main>
+            <div class="scroll-hint white-hint" onclick="scrollToPage('page-artifacts')">探索奥恩神器图鉴 ↓</div>
+        </section>
+
+        <!-- 第四页：神器展示 -->
+        <section class="page-section" id="page-artifacts">
+            <main class="w1024 artifact-ultimate-layout section-animate">
+                <div class="art-display-viewer">
+                    <div class="art-viewer-wrap" id="artViewer">
+                        <div class="art-img-side slide-el">
+                            <img src="images/魔蕴.png" id="artBigImg">
+                        </div>
+                        <div class="art-info-side">
+                            <h2 id="artName" class="slide-el">神器</h2>
+                            <div class="art-stat-pure slide-el">属性: <span id="artStat">加载中...</span></div>
+                            <div class="art-desc-box slide-el">
+                                <p id="artDesc">效果描述...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="art-list-viewer">
+                    <div class="art-scroll-mask" id="artScrollArea">
+                        <div class="art-track-container" id="artTrack"></div>
+                    </div>
+                </div>
+            </main>
+            <div class="scroll-hint white-hint" onclick="scrollToPage('page-team')">了解小组成员 ↓</div>
+        </section>
+
+        <!-- 第五页：小组成员 (修正居中) -->
+        <section class="page-section" id="page-team">
+            <main class="w1024 content-fixed-area team-page-wrapper section-animate">
+                <h2 class="page-title">开发团队</h2>
+                <div class="team-grand-stretch" id="teamContainer">
+                    <!-- 成员 1 -->
+                    <div class="member-box active" onclick="stretchMember(this)">
+                        <div class="member-photo"><img src="images/朱博琛.jpg"></div>
+                        <div class="member-card-content">
+                            <div class="card-inner-text">
+                                <h3>朱博琛</h3>
+                                <span class="role-badge">网页制作 / 组长</span>
+                                <p>负责实验室整体视觉设计、交互逻辑编写及前端代码实现，统筹项目开发进度。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 成员 2 -->
+                    <div class="member-box" onclick="stretchMember(this)">
+                        <div class="member-photo"><img src="images/李少坤.jpg"></div>
+                        <div class="member-card-content">
+                            <div class="card-inner-text">
+                                <h3>李少坤</h3>
+                                <span class="role-badge">演讲解说 / 数据</span>
+                                <p>负责项目核心数据的收集与校验，并在最终演示中担任解说，介绍装备合成奥秘。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 成员 3 -->
+                    <div class="member-box" onclick="stretchMember(this)">
+                        <div class="member-photo"><img src="images/孔德君.jpg"></div>
+                        <div class="member-card-content">
+                            <div class="card-inner-text">
+                                <h3>孔德君</h3>
+                                <span class="role-badge">PPT制作 / 文案</span>
+                                <p>负责项目演示文稿 (PPT) 的全流程设计，以及项目说明文档的策划与编写。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="w1024 site-footer">
+                <div class="footer-divider"></div>
+                <p>山外信工版权所有</p>
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        /** 核心数据库 **/
+        const DATABASE = {
+            "sword-sword": { name: "锐利之刃", desc: "极大提升物理攻击。" },
+            "bow-sword": { name: "巨人捕手", desc: "对高生命敌人造成额外伤害。" },
+            "glove-sword": { name: "无尽之刃", desc: "大幅提升暴击伤害。" },
+            "rod-sword": { name: "海克斯科技枪刃", desc: "提供全能吸血。" },
+            "sword-tear": { name: "朔极之矛", desc: "普攻回蓝。" },
+            "sword-vest": { name: "夜之锋刃", desc: "残血隐身。" },
+            "belt-sword": { name: "斯塔拉克的挑战护手", desc: "攻击与生命加成。" },
+            "cloak-sword": { name: "饮血剑", desc: "全能吸血与护盾。" },
+            "bow-bow": { name: "红霸符", desc: "灼烧与重伤效果。" },
+            "bow-glove": { name: "最后的轻语", desc: "物理削甲。" },
+            "bow-rod": { name: "鬼索的狂暴之刃", desc: "叠加攻速。" },
+            "bow-tear": { name: "虚空之杖", desc: "法强与法穿。" },
+            "bow-vest": { name: "泰坦的坚决", desc: "叠加双抗。" },
+            "belt-bow": { name: "纳什之牙", desc: "爆发攻速。" },
+            "bow-cloak": { name: "海妖之怒", desc: "额外真伤。" },
+            "glove-glove": { name: "窃贼手套", desc: "随机生成装备。" },
+            "glove-rod": { name: "珠光护手", desc: "法术暴击。" },
+            "glove-tear": { name: "正义之手", desc: "增伤或吸血。" },
+            "glove-vest": { name: "坚定之心", desc: "百分比减伤。" },
+            "belt-glove": { name: "强袭者的链枷", desc: "控制抗性。" },
+            "cloak-glove": { name: "水银", desc: "免疫控制。" },
+            "rod-rod": { name: "灭世者的死亡之帽", desc: "极致法强。" },
+            "rod-tear": { name: "大天使之杖", desc: "持续增法强。" },
+            "rod-vest": { name: "冕卫", desc: "护盾与法强。" },
+            "belt-rod": { name: "莫洛雷秘典", desc: "技能重伤。" },
+            "cloak-rod": { name: "离子火花", desc: "削弱魔抗。" },
+            "tear-tear": { name: "蓝霸符", desc: "加速回蓝。" },
+            "tear-vest": { name: "圣盾使的誓约", desc: "护盾与双抗。" },
+            "belt-tear": { name: "振奋铠甲", desc: "生命加成与回复。" },
+            "cloak-tear": { name: "适应性头盔", desc: "站位适配属性。" },
+            "vest-vest": { name: "荆棘背心", desc: "护甲与反弹。" },
+            "belt-vest": { name: "日炎斗篷", desc: "范围灼烧。" },
+            "cloak-vest": { name: "石像鬼板甲", desc: "受敌增抗。" },
+            "belt-belt": { name: "狂徒铠甲", desc: "极致生命。" },
+            "belt-cloak": { name: "薄暮法袍", desc: "物理削甲。" },
+            "cloak-cloak": { name: "巨龙之牙", desc: "极致魔抗。" },
+            // 纹章
+            "bow-spatula": { name: "虚空纹章", desc: "获得【虚空】羁绊。" },
+            "spatula-sword": { name: "诺克萨斯纹章", desc: "获得【诺克萨斯】羁绊。" },
+            "cloak-spatula": { name: "约德尔人纹章", desc: "获得【约德尔人】羁绊。" },
+            "spatula-vest": { name: "德玛西亚纹章", desc: "获得【德玛西亚】羁绊。" },
+            "glove-spatula": { name: "祖安纹章", desc: "获得【祖安】羁绊。" },
+            "belt-spatula": { name: "弗雷尔卓德纹章", desc: "获得【弗雷尔卓德】羁绊。" },
+            "spatula-tear": { name: "比尔吉沃特纹章", desc: "获得【比尔吉沃特】羁绊。" },
+            "rod-spatula": { name: "艾欧尼亚纹章", desc: "获得【艾欧尼亚】羁绊。" },
+            "bow-pan": { name: "迅击战士纹章", desc: "获得【迅击战士】羁绊。" },
+            "pan-tear": { name: "神谕者纹章", desc: "获得【神谕者】羁绊。" },
+            "pan-rod": { name: "法师纹章", desc: "获得【法师】羁绊。" },
+            "belt-pan": { name: "斗士纹章", desc: "获得【斗士】羁绊。" },
+            "glove-pan": { name: "征服者纹章", desc: "获得【征服者】羁绊。" },
+            "pan-sword": { name: "裁决战士纹章", desc: "获得【裁决战士】羁绊。" },
+            "cloak-pan": { name: "主宰纹章", desc: "获得【主宰】羁绊。" },
+            "pan-vest": { name: "护卫纹章", desc: "获得【护卫】羁绊。" },
+            "spatula-spatula": { name: "金铲铲冠冕", desc: "人口+1。" },
+            "pan-pan": { name: "金锅锅冠冕", desc: "人口+1。" },
+            "pan-spatula": { name: "金锅铲冠冕", desc: "人口+1。" }
+        };
+
+        const ARTIFACT_LIST = [
+            { name: "魔蕴", stat: "+15 AD, +15 Mana", desc: "首次施法后持续回复120点法力。" },
+            { name: "中娅悖论", stat: "+45 AP, +30双抗", desc: "生命值低时进入免伤状态。" },
+            { name: "金币收集者", stat: "+30 AD, +20% Crit", desc: "处决低生命目标获金币。" },
+            { name: "投机者之刃", stat: "+15% AS, +10 AP", desc: "攻击获金币，增攻速。" },
+            { name: "诡术师之镜", stat: "+15% AS, +15双抗", desc: "召唤一个克隆体。" },
+            { name: "三相之力", stat: "全属性 +25", desc: "全方位顶级属性加成。" }
+        ];
+
+        /** 1. 全局初始化 **/
+        window.addEventListener('load', () => {
+            // 加载条逻辑
+            const loader = document.getElementById('site-loader');
+            const bar = document.querySelector('.progress-bar');
+            let p = 0;
+            const inv = setInterval(() => {
+                p += 20; if (p >= 100) { p = 100; clearInterval(inv); setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 600); }, 400); }
+                bar.style.width = p + '%';
+            }, 100);
+
+            // 观察者动画
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('fade-visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.section-animate').forEach(s => observer.observe(s));
+
+            // 初始化子模块
+            initSynthesisSystem();
+            initArtSystem();
+        });
+
+        /** 2. 合成逻辑 - 核心隔离修复 **/
+        let poolItems = [], poolEmblems = [];
+
+        function initSynthesisSystem() {
+            // 成装按钮绑定
+            document.querySelectorAll('#page-items .item-btn').forEach(btn => {
+                btn.addEventListener('click', () => handleSynthesisClick('items', btn));
+            });
+            // 纹章按钮绑定
+            document.querySelectorAll('#page-emblems .emb-card').forEach(btn => {
+                btn.addEventListener('click', () => handleSynthesisClick('emblems', btn));
+            });
+        }
+
+        function handleSynthesisClick(pageType, btn) {
+            let currentPool = (pageType === 'items') ? poolItems : poolEmblems;
+            let sectionId = (pageType === 'items') ? 'page-items' : 'page-emblems';
+            let displayId = (pageType === 'items') ? 'resItemsContainer' : 'resEmblemsContainer';
+
+            // 如果当前池已满2个，清除之前状态
+            if (currentPool.length === 2) {
+                currentPool.length = 0;
+                document.querySelectorAll(`#${sectionId} .item-card`).forEach(c => c.classList.remove('active'));
+            }
+
+            btn.classList.add('active');
+            currentPool.push({ id: btn.dataset.id, type: btn.dataset.type });
+
+            if (currentPool.length === 2) {
+                // 纹章页特殊规则拦截
+                if (pageType === 'emblems' && currentPool[0].type === 'base' && currentPool[1].type === 'base') {
+                    setTimeout(() => clearSynthesis(pageType), 400);
+                    return;
+                }
+
+                const key = currentPool.map(o => o.id).sort().join('-');
+                const result = DATABASE[key];
+                const container = document.getElementById(displayId);
+
+                if (result) {
+                    container.querySelector('.guide-text').style.display = 'none';
+                    container.querySelector('.fusion-content').style.display = 'flex';
+                    container.querySelector('.reset-link').style.display = 'block';
+                    container.querySelector('h4').innerText = result.name;
+                    container.querySelector('p').innerText = result.desc;
+                    container.querySelector('.res-img').src = `images/${result.name}.png`;
+                }
+            }
+        }
+
+        function clearSynthesis(type) {
+            const sectionId = (type === 'items') ? 'page-items' : 'page-emblems';
+            const displayId = (type === 'items') ? 'resItemsContainer' : 'resEmblemsContainer';
+            if (type === 'items') poolItems = []; else poolEmblems = [];
+
+            document.querySelectorAll(`#${sectionId} .item-card`).forEach(c => c.classList.remove('active'));
+            const con = document.getElementById(displayId);
+            con.querySelector('.guide-text').style.display = 'block';
+            con.querySelector('.fusion-content').style.display = 'none';
+            con.querySelector('.reset-link').style.display = 'none';
+        }
+
+        /** 3. 神器与轮播逻辑保持稳定 **/
+        let slideIdx = 0;
+        function changeSlide(dir) {
+            const items = document.querySelectorAll('.stack-item');
+            slideIdx = (slideIdx + dir + items.length) % items.length;
+            items.forEach((it, i) => {
+                it.className = 'stack-item';
+                if (i === slideIdx) it.classList.add('active');
+                else if (i === (slideIdx + 1) % items.length) it.classList.add('next');
+                else it.classList.add('prev');
+            });
+        }
+
+        function scrollToPage(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        let artIdx = ARTIFACT_LIST.length, artLocked = false;
+        function initArtSystem() {
+            const track = document.getElementById('artTrack');
+            const list = [...ARTIFACT_LIST, ...ARTIFACT_LIST, ...ARTIFACT_LIST];
+            track.innerHTML = list.map((it, i) => `<div class="art-parallelogram-item" onclick="clickArt(${i})"><div class="skew-reset"><img src="images/${it.name}.png"><h4>${it.name}</h4></div></div>`).join('');
+            updateArtView(false);
+        }
+        function clickArt(i) { artIdx = i; updateArtView(true); }
+        function updateArtView(smooth = true) {
+            const track = document.getElementById('artTrack');
+            track.style.transition = smooth ? "transform 0.5s cubic-bezier(0.23,1,0.32,1)" : "none";
+            track.style.transform = `translateY(${260 - artIdx * 95 - 37}px)`;
+            const items = track.querySelectorAll('.art-parallelogram-item');
+            items.forEach((it, i) => i === artIdx ? it.classList.add('active') : it.classList.remove('active'));
+            const data = ARTIFACT_LIST[artIdx % ARTIFACT_LIST.length];
+            const viewer = document.getElementById('artViewer');
+            viewer.classList.remove('active-anim');
+            void viewer.offsetWidth;
+            viewer.classList.add('active-anim');
+            document.getElementById('artName').innerText = data.name;
+            document.getElementById('artStat').innerText = data.stat;
+            document.getElementById('artDesc').innerText = data.desc;
+            document.getElementById('artBigImg').src = `images/${data.name}.png`;
+            if (artIdx >= ARTIFACT_LIST.length * 2) { setTimeout(() => { artIdx = ARTIFACT_LIST.length; updateArtView(false); }, 500); }
+            if (artIdx < ARTIFACT_LIST.length) { setTimeout(() => { artIdx = ARTIFACT_LIST.length * 2 - 1; updateArtView(false); }, 500); }
+        }
+        document.getElementById('artScrollArea').onwheel = (e) => {
+            e.preventDefault(); if (artLocked) return;
+            artLocked = true; artIdx = e.deltaY > 0 ? artIdx + 1 : artIdx - 1;
+            updateArtView(true); setTimeout(() => artLocked = false, 250);
+        };
+
+        function stretchMember(el) {
+            document.querySelectorAll('.member-box').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
